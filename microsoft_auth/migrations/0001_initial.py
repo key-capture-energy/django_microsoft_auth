@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [migrations.swappable_dependency(settings.AUTH_USER_MODEL)]
+    dependencies = [migrations.swappable_dependency(settings.AUTH_USER_MODEL), ('ptr', '0003_site_configuration')]
 
     operations = [
         migrations.CreateModel(
@@ -29,8 +29,17 @@ class Migration(migrations.Migration):
                 (
                     "microsoft_id",
                     models.CharField(
-                        max_length=32, verbose_name="microsoft account id"
+                        max_length=64, verbose_name="microsoft account id"
                     ),
+                ),
+                (
+                    "directory_user",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="django_user",
+                        to="ptr.Directory"
+                    )
                 ),
                 (
                     "user",
