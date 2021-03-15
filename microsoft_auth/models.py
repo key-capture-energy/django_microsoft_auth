@@ -23,6 +23,7 @@ for field in User._meta.fields:
 
 class MicrosoftAccount(models.Model):
     microsoft_id = models.CharField(_("microsoft account id"), max_length=64)
+    directory_user = models.ForeignKey("ptr.Directory", on_delete=models.CASCADE, null=True, related_name='django_user')
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
